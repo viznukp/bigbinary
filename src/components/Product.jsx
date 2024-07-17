@@ -47,6 +47,7 @@ const Product = () => {
         <Typography className="py-2 text-4xl font-semibold" style="h1">
           {name}
         </Typography>
+        <hr className="neeto-ui-bg-black h-1" />
       </div>
       <div className="mt-6 flex gap-4">
         <div className="w-2/5">
