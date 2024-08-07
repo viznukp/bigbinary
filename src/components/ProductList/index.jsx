@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
+import withTitle from "utils/withTitle";
 
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "./constants";
 import ProductListItem from "./ProductListItem";
@@ -98,4 +99,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default withTitle(ProductList);
