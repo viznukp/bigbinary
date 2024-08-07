@@ -1,11 +1,14 @@
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { Button } from "neetoui";
 import { isNil } from "ramda";
+import { useTranslation } from "react-i18next";
 
 import ProductQuantity from "./ProductQuantity";
 
 const AddToCart = ({ slug }) => {
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
+
+  const { t } = useTranslation();
 
   const handleClick = e => {
     e.stopPropagation();
@@ -14,7 +17,7 @@ const AddToCart = ({ slug }) => {
   };
 
   if (isNil(selectedQuantity)) {
-    return <Button label="Add to cart" size="large" onClick={handleClick} />;
+    return <Button label={t("addToCart")} size="large" onClick={handleClick} />;
   }
 
   return <ProductQuantity {...{ slug }} />;

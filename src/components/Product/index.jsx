@@ -8,6 +8,7 @@ import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { useShowProduct } from "hooks/reactQuery/useProductsApi";
 import { Typography, Button } from "neetoui";
 import { isNotNil } from "ramda";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import routes from "routes";
 
@@ -18,6 +19,8 @@ const Product = () => {
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
 
   const { data: product = {}, isLoading, isError } = useShowProduct(slug);
+
+  const { t } = useTranslation();
 
   if (isLoading) {
     return <PageLoader />;
@@ -45,18 +48,18 @@ const Product = () => {
         </div>
         <div className="w-3/5 space-y-4">
           <Typography>{description}</Typography>
-          <Typography>MRP: {mrp}</Typography>
+          <Typography>{t("mrp", { mrp })}</Typography>
           <Typography className="font-semibold">
-            Offer price: {offerPrice}
+            {t("offerPrice", { offerPrice })}
           </Typography>
           <Typography className="font-semibold text-green-600">
-            {discountPercentage}% off
+            {t("discountRate", { discountPercentage })}
           </Typography>
           <div className="flex space-x-10">
             <AddToCart {...{ slug }} />
             <Button
               className="bg-neutral-800 hover:bg-neutral-950"
-              label="Buy now"
+              label={t("buyNow")}
               size="large"
               to={routes.checkout}
               onClick={() => setSelectedQuantity(selectedQuantity || 1)}

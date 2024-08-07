@@ -8,6 +8,7 @@ import useQueryParams from "hooks/useQueryParams";
 import { filterNonNull } from "neetocist";
 import { Input, NoData, Pagination } from "neetoui";
 import { isEmpty, mergeLeft } from "ramda";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
@@ -22,6 +23,8 @@ const ProductList = () => {
   const [searchKey, setSearchKey] = useState(searchTerm);
 
   const history = useHistory();
+
+  const { t } = useTranslation();
 
   const handlePageNavigation = page =>
     history.replace(
@@ -60,10 +63,10 @@ const ProductList = () => {
     <div className="flex h-screen flex-col">
       <Header
         shouldShowBackButton={false}
-        title="Smile cart"
+        title={t("title")}
         actionBlock={
           <Input
-            placeholder="Search products"
+            placeholder={t("searchProducts")}
             prefix={<Search />}
             type="search"
             value={searchKey}
@@ -75,7 +78,7 @@ const ProductList = () => {
         }
       />
       {isEmpty(products) ? (
-        <NoData className="h-full w-full" title="No products to show" />
+        <NoData className="h-full w-full" title={t("noData")} />
       ) : (
         <div className="grid grid-cols-2 justify-items-center gap-y-8 p-4 md:grid-cols-3 lg:grid-cols-4">
           {products.map(product => (
